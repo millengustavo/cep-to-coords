@@ -16,3 +16,8 @@ pip install -r requirements.txt
 cd src/geocode_python
 python geocode.py
 ```
+
+# Basic testing
+```bash
+python -m unittest discover
+```
