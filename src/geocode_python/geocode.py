@@ -42,9 +42,12 @@ def address_from_cep(cep, country='Brasil'):
     try:
         search = pycep_correios.consultar_cep(cep)
         address = search['end'] + ' ' + search['cidade'] + ' ' + country
-    except Exception as e:
+        # Treating the case when Correios API return an empty json
+        if address == '  ' + country:
+            address = '-'
+    except:
         address = '-'
-        print(e)
+        # print(e)
 
     return address
 
@@ -72,5 +75,6 @@ def cep_to_coords(cep):
 
 
 if __name__ == "__main__":
-    coords = tuple(cep_to_coords('20271-130'))
+    test_cep = '20271-130'
+    coords = cep_to_coords(test_cep)
     print(coords)
