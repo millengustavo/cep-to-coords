@@ -17,8 +17,8 @@ df['lon'] = float('nan')
 for ind, elem in enumerate(unique_ceps):
     try:
         coords = cep_to_coords(elem)
-        df.loc[df[cep_column] == elem, 'lat'] = coords[0]
-        df.loc[df[cep_column] == elem, 'lon'] = coords[1]
+        df.loc[df[cep_column] == elem, 'lon'] = coords[0]
+        df.loc[df[cep_column] == elem, 'lat'] = coords[1]
     except Exception as e:
         print(elem)
         print(coords)

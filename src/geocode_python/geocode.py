@@ -12,7 +12,7 @@ def geocode(location,
         location: string with relevant identifiers (address, city, country)
 
     returns:
-        coords: list with [lat, lon] floats
+        coords: list with [lon, lat] floats
 
     obs: The API returns other infos and can accept other inputs to narrow the search, 
     feel free to modify this function
