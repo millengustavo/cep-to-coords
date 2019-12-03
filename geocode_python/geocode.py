@@ -74,7 +74,7 @@ def cep_to_coords(cep):
     return coords
 
 
-if __name__ == "__main__":
-    test_cep = '20271-130'
-    coords = cep_to_coords(test_cep)
-    print(coords)
+# if __name__ == "__main__":
+#     test_cep = '20271-130'
+#     coords = cep_to_coords(test_cep)
+#     print(coords)

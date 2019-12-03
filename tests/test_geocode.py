@@ -39,11 +39,11 @@ class TestGeocode(unittest.TestCase):
              '': (float('nan'), float('nan')),
              '123456': (float('nan'), float('nan'))}
 
-        self.assertEqual(
+        self.assertAlmostEqual(
             d['01310-200'], tuple(cep_to_coords('01310-200')), "Wrong result!")
-        self.assertEqual(
+        self.assertAlmostEqual(
             d['22021001'], tuple(cep_to_coords('22021001')), "Wrong result!")
-        self.assertEqual(
+        self.assertAlmostEqual(
             str(d['']), str(tuple(cep_to_coords(''))), "Wrong result!")
-        self.assertEqual(
+        self.assertAlmostEqual(
             str(d['123456']), str(tuple(cep_to_coords('123456'))), "Wrong result!")

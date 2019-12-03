@@ -2,3 +2,6 @@ __pycache__
 .vscode
 *.txt
 *.csv
+geocode_python_millengustavo.egg-info
+dist
+build
