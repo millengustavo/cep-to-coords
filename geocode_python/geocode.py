@@ -6,16 +6,20 @@ import pycep_correios
 
 def geocode(location,
             server="http://photon.komoot.de/"):
-    """Returns latitude and longitude from Photon API using location
-
-    inputs:
-        location: string with relevant identifiers (address, city, country)
-
-    returns:
-        coords: list with [lon, lat] floats
-
-    obs: The API returns other infos and can accept other inputs to narrow the search, 
+    """
+    Returns latitude and longitude from Photon API using location
+    OBS: The API returns other infos and can accept other inputs to narrow the search, 
     feel free to modify this function
+
+    Parameters
+    ----------
+    location : str
+        String with relevant location identifiers (address, city, country)
+
+    Returns
+    -------
+    coords : list 
+        Geographic coordinates list composed by [lon, lat] floats
     """
 
     try:
@@ -31,13 +35,18 @@ def geocode(location,
 
 
 def address_from_cep(cep, country='Brasil'):
-    """Get address and city from pycep_correios using zipcode (CEP)
+    """
+    Get address and city from pycep_correios using zipcode (CEP)
 
-    inputs:
-        cep: zipcode (only numbers)
+    Parameters
+    ----------
+    cep : str
+        Brazilian zipcode (CEP) - only numbers
 
-    returns:
-        string: concatenated string with address, city and country
+    Returns
+    -------
+    address : str 
+        Concatenated string with address, city and country
     """
     try:
         search = pycep_correios.consultar_cep(cep)
@@ -53,14 +62,19 @@ def address_from_cep(cep, country='Brasil'):
 
 
 def cep_to_coords(cep):
-    """Returns lat and long from CEP (brazilian zipcode)
+    """
+    Returns lat and long from CEP (brazilian zipcode)
 
-    inputs:
-        cep: string with zipcode. ex:
+    Parameters
+    ----------
+    cep : str
+        String with Brazilian zipcode (CEP). ex:
         '01310-200', '22021001', '20271-130'
 
-    returns:
-        coords: list with [lat, lon] floats
+    Returns
+    -------
+    coords : list 
+        Geographic coordinates list composed by [lat, lon] floats
     """
     # Regex to avoid CEPs with dash ('-')
     regex = re.compile('[%s]' % re.escape(string.punctuation))
