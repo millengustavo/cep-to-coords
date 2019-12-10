@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="geocode_python-millengustavo",
+    name="cep_to_coords-millengustavo",
     version="0.0.1",
     author="Gustavo Millen",
     author_email="millengustavo@gmail.com",
     description="Convert CEP (Brazilian zip code) to coordinates",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/millengustavo/geocode_python",
+    url="https://github.com/millengustavo/cep_to_coords",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

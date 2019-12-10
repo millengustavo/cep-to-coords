@@ -1,5 +1,5 @@
 import unittest
-from src.geocode_python.geocode import cep_to_coords, address_from_cep, geocode
+from cep_to_coords.geocode import cep_to_coords, address_from_cep, geocode
 
 
 class TestGeocode(unittest.TestCase):
@@ -22,7 +22,7 @@ class TestGeocode(unittest.TestCase):
     def test_geocode(self):
         # Defining the values as tuples because lists are unhashable
         d = {'Avenida Paulista São Paulo Brasil': (-46.65596048644724, -23.56150875),
-             'Avenida Atlântica Rio de Janeiro Brasil': (-43.189305, -22.984457),
+             'Avenida Atlântica Rio de Janeiro Brasil': (-43.1894432, -22.9847059),
              '-': (float('nan'), float('nan'))}
 
         self.assertEqual(
@@ -34,16 +34,16 @@ class TestGeocode(unittest.TestCase):
 
     def test_cep_to_coords(self):
         # Defining the values as tuples because lists are unhashable
-        d = {'01310-200': (-46.65596048644724, -23.56150875),
-             '22021001': (-43.189305, -22.984457),
+        d = {'01310-200': (-23.56150875, -46.65596048644724),
+             '22021001': (-22.9847059, -43.1894432),
              '': (float('nan'), float('nan')),
              '123456': (float('nan'), float('nan'))}
 
-        self.assertAlmostEqual(
+        self.assertEqual(
             d['01310-200'], tuple(cep_to_coords('01310-200')), "Wrong result!")
-        self.assertAlmostEqual(
+        self.assertEqual(
             d['22021001'], tuple(cep_to_coords('22021001')), "Wrong result!")
-        self.assertAlmostEqual(
+        self.assertEqual(
             str(d['']), str(tuple(cep_to_coords(''))), "Wrong result!")
-        self.assertAlmostEqual(
+        self.assertEqual(
             str(d['123456']), str(tuple(cep_to_coords('123456'))), "Wrong result!")

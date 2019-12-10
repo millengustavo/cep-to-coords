@@ -28,6 +28,7 @@ def geocode(location,
         r = requests.get(server + 'api?q=' + location + "&limit=1")
         print('Requesting coordinates from {}'.format(location))
         result = r.json()
+        # list with lon, lat
         coords = result['features'][0]['geometry']['coordinates']
         return coords
     except Exception as e:
@@ -81,14 +82,10 @@ def cep_to_coords(cep):
     try:
         cep = regex.sub('', cep)
         coords = geocode(address_from_cep(cep))
+        # change [lon, lat] to [lat, lon]
+        coords[0], coords[1] = coords[1], coords[0]
     except Exception as e:
         coords = [float('nan'), float('nan')]
         print(e)
 
     return coords
-
-
-# if __name__ == "__main__":
-#     test_cep = '20271-130'
-#     coords = cep_to_coords(test_cep)
-#     print(coords)
