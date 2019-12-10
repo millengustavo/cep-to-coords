@@ -1,26 +1,26 @@
-# Python package to get Coordinates based on the address
+# Pacote Python para converter CEP em latitude e longitude
 
-# How to use:
-1. Install from source
+# Como usar:
+1. Instale:
 ```bash
-git clone https://github.com/millengustavo/geocode_python.git
-cd geocode_python
+git clone https://github.com/millengustavo/cep_to_coords.git
+cd cep_to_coords
 git checkout master
 pip install -e .
 ```
 
-2. Convert CEP to longitude and latitude:
+2. Converta um CEP para latitude e longitude:
 ```python
-from geocode_python.geocode import cep_to_coords
+from cep_to_coords.geocode import cep_to_coords
 
-lon, lat = cep_to_coords('22070-900')
+lat, lon = cep_to_coords('22070-900')
 
 >>> print('Latitude: {}, Longitude: {}'.format(lat, lon))
 Latitude: -22.9864082, Longitude: -43.189592
 ```
 
 
-# Basic testing
+# Testando
 ```bash
 python -m unittest discover
 ```
