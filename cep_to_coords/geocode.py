@@ -4,8 +4,7 @@ import requests
 import pycep_correios
 
 
-def geocode(location,
-            server="http://photon.komoot.de/"):
+def geocode(location, server="http://photon.komoot.de/"):
     """
     Returns latitude and longitude from Photon API using location
     OBS: The API returns other infos and can accept other inputs to narrow the search, 
@@ -23,19 +22,19 @@ def geocode(location,
     """
 
     try:
-        if location == '-':
-            return [float('nan'), float('nan')]
-        r = requests.get(server + 'api?q=' + location + "&limit=1")
-        print('Requesting coordinates from {}'.format(location))
+        if location == "-":
+            return [float("nan"), float("nan")]
+        r = requests.get(server + "api?q=" + location + "&limit=1")
+        print("Requesting coordinates from {}".format(location))
         result = r.json()
         # list with lon, lat
-        coords = result['features'][0]['geometry']['coordinates']
+        coords = result["features"][0]["geometry"]["coordinates"]
         return coords
     except Exception as e:
         print(e)
 
 
-def address_from_cep(cep, country='Brasil'):
+def address_from_cep(cep, country="Brasil"):
     """
     Get address and city from pycep_correios using zipcode (CEP)
 
@@ -51,12 +50,12 @@ def address_from_cep(cep, country='Brasil'):
     """
     try:
         search = pycep_correios.consultar_cep(cep)
-        address = search['end'] + ' ' + search['cidade'] + ' ' + country
+        address = search["end"] + " " + search["cidade"] + " " + country
         # Treating the case when Correios API return an empty json
-        if address == '  ' + country:
-            address = '-'
+        if address == "  " + country:
+            address = "-"
     except:
-        address = '-'
+        address = "-"
         # print(e)
 
     return address
@@ -78,14 +77,14 @@ def cep_to_coords(cep):
         Geographic coordinates list composed by [lat, lon] floats
     """
     # Regex to avoid CEPs with dash ('-')
-    regex = re.compile('[%s]' % re.escape(string.punctuation))
+    regex = re.compile("[%s]" % re.escape(string.punctuation))
     try:
-        cep = regex.sub('', cep)
+        cep = regex.sub("", cep)
         coords = geocode(address_from_cep(cep))
         # change [lon, lat] to [lat, lon]
         coords[0], coords[1] = coords[1], coords[0]
     except Exception as e:
-        coords = [float('nan'), float('nan')]
+        coords = [float("nan"), float("nan")]
         print(e)
 
     return coords
