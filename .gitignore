@@ -6,3 +6,4 @@ geocode_python_millengustavo.egg-info
 dist
 build
 PKG-INFO
+.DS_Store
