@@ -1,8 +1,7 @@
 __pycache__
 .vscode
-*.txt
 *.csv
-geocode_python_millengustavo.egg-info
+cep_to_coords_millengustavo.egg-info
 dist
 build
 PKG-INFO
