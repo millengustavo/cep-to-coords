@@ -10,7 +10,7 @@ cep_to_coords functions
 -----------------------
 
 Geocode (cep_to_coords.geocode)
-###################################################################
+###############################
 
 .. currentmodule:: cep_to_coords.geocode
 
