@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="cep_to_coords-millengustavo",
+    name="cep_to_coords",
     version="0.0.1",
     author="Gustavo Millen",
     author_email="millengustavo@gmail.com",
@@ -12,11 +12,11 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/millengustavo/cep_to_coords",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages("."),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires=">=3.6",
 )
