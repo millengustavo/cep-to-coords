@@ -1,3 +1,4 @@
 nbsphinx>=0.4.2,<1
 Sphinx>=1.7.1,<2
 sphinx-rtd-theme>=0.4.3,<1
+pycep-correios==3.2.0

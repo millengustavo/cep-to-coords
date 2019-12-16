@@ -6,3 +6,4 @@ dist
 build
 PKG-INFO
 .DS_Store
+cep_to_coords.egg-info
