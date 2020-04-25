@@ -5,8 +5,8 @@ https://cep-to-coords.readthedocs.io/en/latest/
 # Como usar:
 1. Instale:
 ```bash
-git clone https://github.com/millengustavo/cep_to_coords.git
-cd cep_to_coords
+git clone https://github.com/millengustavo/cep-to-coords.git
+cd cep-to-coords
 git checkout master
 pip install -e .
 ```
