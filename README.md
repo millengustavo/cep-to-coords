@@ -17,7 +17,7 @@ from cep_to_coords.geocode import cep_to_coords
 
 lat, lon = cep_to_coords('22070-900')
 
->>> print('Latitude: {}, Longitude: {}'.format(lat, lon))
+>>> print(f'Latitude: {lat}, Longitude: {lon}')
 Latitude: -22.9864082, Longitude: -43.189592
 ```
 
