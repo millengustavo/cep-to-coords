@@ -1,3 +1,6 @@
+import os
+import re
+import string
 import requests
 import pycep_correios
 from abc import ABC, abstractmethod
@@ -12,6 +15,11 @@ class CEPConverter(ABC):
 class AddressConverter(CEPConverter):
     def __call__(self, cep):
         return AddressCoordinates(cep)()
+
+
+class CEPAbertoConverter(CEPConverter):
+    def __call__(self, cep):
+        return CEPAbertoCoordinates(cep)()
 
 
 class Coordinates(ABC):
@@ -60,6 +68,31 @@ class AddressCoordinates(Coordinates):
         return coordinates
 
 
+class CEPAbertoCoordinates(Coordinates):
+    def _clean_CEP(self):
+        # Regex to avoid CEPs with dash ('-')
+        regex = re.compile("[%s]" % re.escape(string.punctuation))
+        return regex.sub("", self.cep)
+
+    def fetch_coordinates(self):
+        try:
+            url = f"https://www.cepaberto.com/api/v3/cep?cep={self._clean_CEP()}"
+            # O seu token está visível apenas pra você
+            headers = {'Authorization': f'Token token={os.getenv("CEP_ABERTO_TOKEN")}'}
+            response = requests.get(url, headers=headers)
+            json_response = response.json()
+            return {
+                "latitude": float(json_response["latitude"]),
+                "longitude": float(json_response["longitude"]),
+            } 
+        except requests.exceptions.RequestException as e:
+            raise SystemExit(e)
+
+    def __call__(self):
+        coordinates = self.fetch_coordinates()
+        return coordinates
+
+
 def cep_to_coords(factory: CEPConverter, cep: str) -> dict:
     coordinates = factory(cep)
     return coordinates
@@ -67,5 +100,6 @@ def cep_to_coords(factory: CEPConverter, cep: str) -> dict:
 
 if __name__ == "__main__":
     print(cep_to_coords(AddressConverter(), "01310-200"))
-    # print(cep_to_coords(XConverter(), "01310-200"))
+    # export CEP_ABERTO_TOKEN='your-token'
+    print(cep_to_coords(CEPAbertoConverter(), "01310-200"))
     # {'latitude': -23.56150875, 'longitude': -46.65596048644724}
