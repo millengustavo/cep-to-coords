@@ -25,6 +25,12 @@ class CEPAbertoConverter(CEPConverter):
 class Coordinates(ABC):
     def __init__(self, cep):
         self.cep = cep
+        self.clean_cep = self._clean_CEP()
+
+    def _clean_CEP(self):
+        # Regex to avoid CEPs with dash ('-')
+        regex = re.compile("[%s]" % re.escape(string.punctuation))
+        return regex.sub("", self.cep)
 
     @abstractmethod
     def __call__(self):
@@ -34,7 +40,7 @@ class Coordinates(ABC):
 class AddressCoordinates(Coordinates):
     def fetch_address(self):
         try:
-            search_result = pycep_correios.consultar_cep(self.cep)
+            search_result = pycep_correios.consultar_cep(self.clean_cep)
             address = " ".join([search_result["end"], search_result["cidade"], "Brasil"])
             # Treating the case when Correios API return an empty json
             if address == " Brasil":
@@ -69,14 +75,9 @@ class AddressCoordinates(Coordinates):
 
 
 class CEPAbertoCoordinates(Coordinates):
-    def _clean_CEP(self):
-        # Regex to avoid CEPs with dash ('-')
-        regex = re.compile("[%s]" % re.escape(string.punctuation))
-        return regex.sub("", self.cep)
-
     def fetch_coordinates(self):
         try:
-            url = f"https://www.cepaberto.com/api/v3/cep?cep={self._clean_CEP()}"
+            url = f"https://www.cepaberto.com/api/v3/cep?cep={self.clean_cep}"
             # O seu token está visível apenas pra você
             headers = {'Authorization': f'Token token={os.getenv("CEP_ABERTO_TOKEN")}'}
             response = requests.get(url, headers=headers)
