@@ -96,12 +96,15 @@ class CEPAbertoCoordinates(Coordinates):
 
 
 def cep_to_coords(factory: CEPConverter, cep: str) -> dict:
-    coordinates = factory(cep)
+    coordinates = factory()(cep)
     return coordinates
 
 
 if __name__ == "__main__":
-    print(cep_to_coords(AddressConverter(), "01310-200"))
+    print(cep_to_coords(AddressConverter, "01310-200"))
+    # OR
+    # print(AddressConverter()("01310-200"))
+    # OR
     # export CEP_ABERTO_TOKEN='your-token'
-    print(cep_to_coords(CEPAbertoConverter(), "01310-200"))
+    # print(cep_to_coords(CEPAbertoConverter, "01310-200"))
     # {'latitude': -23.56150875, 'longitude': -46.65596048644724}
