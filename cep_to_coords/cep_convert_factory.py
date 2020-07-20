@@ -78,7 +78,8 @@ class CEPAbertoCoordinates(Coordinates):
     def fetch_coordinates(self):
         try:
             url = f"https://www.cepaberto.com/api/v3/cep?cep={self.clean_cep}"
-            # O seu token está visível apenas pra você
+            # Sign up for your free token on: https://cepaberto.com/
+            # export CEP_ABERTO_TOKEN='your-token'
             headers = {'Authorization': f'Token token={os.getenv("CEP_ABERTO_TOKEN")}'}
             response = requests.get(url, headers=headers)
             json_response = response.json()
