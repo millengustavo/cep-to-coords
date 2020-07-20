@@ -5,13 +5,13 @@ from abc import ABC, abstractmethod
 
 class CEPConverter(ABC):
     @abstractmethod
-    def convert_cep(self, cep):
+    def __call__(self, cep):
         pass
 
 
 class AddressConverter(CEPConverter):
-    def convert_cep(self, cep):
-        return AddressCoordinates(cep)
+    def __call__(self, cep):
+        return AddressCoordinates(cep)()
 
 
 class Coordinates(ABC):
@@ -19,7 +19,7 @@ class Coordinates(ABC):
         self.cep = cep
 
     @abstractmethod
-    def compute(self):
+    def __call__(self):
         pass
 
 
@@ -54,14 +54,14 @@ class AddressCoordinates(Coordinates):
         except requests.exceptions.RequestException as e:
             raise SystemExit(e)
 
-    def compute(self):
+    def __call__(self):
         address = self.fetch_address()
         coordinates = self.fetch_coordinates(address)
         return coordinates
 
 
 def cep_to_coords(factory: CEPConverter, cep: str) -> dict:
-    coordinates = factory.convert_cep(cep).compute()
+    coordinates = factory(cep)
     return coordinates
 
 
