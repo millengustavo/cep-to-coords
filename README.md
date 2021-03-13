@@ -3,6 +3,11 @@
 # Como usar:
 1. Instale:
 ```bash
+pip install cep-to-coords
+```
+
+Ou direto pela fonte:
+```bash
 git clone https://github.com/millengustavo/cep-to-coords.git
 cd cep-to-coords
 git checkout master
