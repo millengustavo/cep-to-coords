@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="cep_to_coords",
-    version="0.0.1",
+    version="0.1.0",
     author="Gustavo Millen",
     author_email="millengustavo@gmail.com",
     description="Convert CEP (Brazilian zip code) to coordinates",
